@@ -9,4 +9,5 @@ public interface MessageService {
 	//void insertMessages(List<Message> messages);
 	//void getAllMessages();
 	Message  getMessagesForUser(String username);
+	List <Message> getAllMessages();
 }

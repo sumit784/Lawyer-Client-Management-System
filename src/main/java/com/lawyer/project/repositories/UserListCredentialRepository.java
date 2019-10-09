@@ -3,6 +3,7 @@ package com.lawyer.project.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import com.lawyer.project.UserCredentials;
 import com.lawyer.project.models.GeneralAnnouncements;
 import com.lawyer.project.models.Users;
 
@@ -13,15 +14,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GeneralAnnouncementRepository extends CrudRepository<GeneralAnnouncements, Long> {
+public interface UserListCredentialRepository extends CrudRepository<UserCredentials, Long> {
 
     //List <GeneralAnnouncements> findAll();
     
-    @Query(value="select text from general_annoucements order by id desc limit 1", nativeQuery=true)
-    String getAnn();
-
-    @Query(value="select text from general_annoucements", nativeQuery=true)
-    List <String> getAnnAll();
+    @Query(value="select username from user_credentials", nativeQuery=true)
+    List<String> getAllUsers();
     
     //Optional<GeneralAnnouncements> findById(Long id);
     

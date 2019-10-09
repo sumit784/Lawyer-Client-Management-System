@@ -88,38 +88,29 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao{
 
     @Override
     public Message getMessageById(String user) {
-        // String sql = "SELECT * FROM message";
-        // List <Message> message = namedParameterJdbcTemplate.query(sql, getSqlParameterByModel(new Message(user)),
-        //         new MessageMapper());
-        // return message;
-         final String sql = "select * from message where user=? and id =11";
-         //final List<Message> vehicles = new ArrayList<Message>();
-         //jdbcTemplate.queryForList(sql, args, argTypes)
-         final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] { user }, new MessageMapper());
-         return rows.get(0);
-        // for (Map<String, Object> row : rows) {
-        //Message car = new Message();
-        // car.setId((long) row.get("id"));
-        // car.setBody((String) row.get("body"));
-        // car.setUser((String) row.get("user"));
-        // vehicles.add(car);
-        // }
-        // return vehicles;
+        final String sql = "select * from message where user=?";
+        final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] { user }, new MessageMapper());
+        return rows.get(0);
+    }
 
+    @Override
+    public List<Message> getAllMessages() {
+        final String sql = "select * from message";
+        final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] {}, new MessageMapper());
+        return rows;
     }
 
     private static SqlParameterSource getSqlParameterByModel(Message message)
-   {
-	   MapSqlParameterSource paramSource =new MapSqlParameterSource();
-	   if(message!= null)
-	   {
-		  paramSource.addValue("id", message.getId());
-		  paramSource.addValue("body", message.getBody());
-		  paramSource.addValue("user", message.getUser());
-		   
-	   }
-	   return paramSource;
-   }
+    {
+	    MapSqlParameterSource paramSource =new MapSqlParameterSource();
+	    if(message!= null)
+	    {
+		    paramSource.addValue("id", message.getId());
+		    paramSource.addValue("body", message.getBody());
+		    paramSource.addValue("user", message.getUser());  
+	    }
+	    return paramSource;
+    }
 
    private static final class MessageMapper implements RowMapper<Message>
    {

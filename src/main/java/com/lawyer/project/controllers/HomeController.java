@@ -1,5 +1,6 @@
 package com.lawyer.project.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,7 +9,10 @@ import com.lawyer.project.services.EmployeeService;
 import com.lawyer.project.services.MessageService;
 import com.lawyer.project.models.Employee;
 import com.lawyer.project.models.Message;
+import com.lawyer.project.repositories.AppointmentRepository;
 import com.lawyer.project.repositories.GeneralAnnouncementRepository;
+import com.lawyer.project.repositories.UserCredentialRepository;
+import com.lawyer.project.repositories.UserListCredentialRepository;
 import com.lawyer.project.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +42,15 @@ public class HomeController {
     @Autowired
     private GeneralAnnouncementRepository announcementRepo;
     @Autowired
+    private UserCredentialRepository userCredentialRepository;
+    @Autowired
     EmployeeService employeeService;
     @Autowired
     MessageService messageService;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
+    private UserListCredentialRepository userListCredentialRepository;
 
 
     
@@ -58,11 +68,18 @@ public class HomeController {
     
     @GetMapping("/")
     public String showIndex(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        Message m = messageService.getMessagesForUser(name);
-        System.out.println(m.getBody());
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //String name = auth.getName();
+        //Message m = messageService.getMessagesForUser(name);
+        //System.out.println(m.getBody());
+        //List <Message> n = messageService.getAllMessages();
+        //System.out.println(n.size());
+        //userCredentialRepository.addUser("ven793", "1", "address", "email", "phone");
         //System.out.println(name);
+        //Date date = new Date();
+        //appointmentRepository.addAppointment("venky", "varanasi", "fun", "email", "contact_number", date);
+        //appointmentRepository.addAppointment("donky", "varanasi", "fun", "email", "contact_number", date);
+        System.out.println(userListCredentialRepository.getAllUsers().size());
         model.addAttribute("announcement", announcementRepo.getAnn());
 
         //announcementRepo.putAnn();
