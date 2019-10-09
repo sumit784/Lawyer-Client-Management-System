@@ -5,7 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.lawyer.project.services.EmployeeService;
+import com.lawyer.project.services.MessageService;
 import com.lawyer.project.models.Employee;
+import com.lawyer.project.models.Message;
 import com.lawyer.project.repositories.GeneralAnnouncementRepository;
 import com.lawyer.project.repositories.UserRepository;
 
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import com.lawyer.project.dao.impl.MessageDaoImpl;
+
 @Controller
 public class HomeController {
 
@@ -35,6 +39,8 @@ public class HomeController {
     private GeneralAnnouncementRepository announcementRepo;
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    MessageService messageService;
 
 
     
@@ -54,8 +60,11 @@ public class HomeController {
     public String showIndex(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        System.out.println(name);
+        Message m = messageService.getMessagesForUser(name);
+        System.out.println(m.getBody());
+        //System.out.println(name);
         model.addAttribute("announcement", announcementRepo.getAnn());
+
         //announcementRepo.putAnn();
         return "master/index";
     }
@@ -74,6 +83,16 @@ public class HomeController {
     @GetMapping("/logout-success")
     public String logoutPage(){
         return "logout";
+    }
+
+    @GetMapping("/home")
+    public String homepage(){
+        return "home";
+    }
+    
+    @GetMapping("/addAppointment")
+    public String appointmentPage(){
+        return "home";
     }
 
     @GetMapping("/admin")

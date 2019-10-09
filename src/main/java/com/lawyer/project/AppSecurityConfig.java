@@ -43,9 +43,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter
         //web.ignoring().antMatchers("/admin");
         //super.configure(http);
         http.authorizeRequests().antMatchers("/admin*").permitAll();
+        http.authorizeRequests().antMatchers("/addAppointment*").permitAll();
+        http.authorizeRequests().antMatchers("/home*").permitAll();
         http
                 .csrf().disable()
-                //.antMatcher("/admin**").permitAll()
                 .authorizeRequests().antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()

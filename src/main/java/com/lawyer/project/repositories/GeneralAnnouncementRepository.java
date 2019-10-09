@@ -8,6 +8,8 @@ import com.lawyer.project.models.Users;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -15,7 +17,7 @@ public interface GeneralAnnouncementRepository extends CrudRepository<GeneralAnn
 
     List <GeneralAnnouncements> findAll();
     
-    @Query(value="select password,user.name from user_credentials,user where password=\"username\" and user.id=1", nativeQuery=true)
+    @Query(value="select body from message where user=\"venkat\"", nativeQuery=true)
     String getAnn();
     
     //@Query(value="insert into user_credentials values(\"venkat\",\"venkat\")", nativeQuery=true)
