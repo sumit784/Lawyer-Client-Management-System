@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.lawyer.project.UserCredentials;
 import com.lawyer.project.dao.impl.MessageDaoImpl;
 
 @Controller
@@ -65,7 +65,22 @@ public class HomeController {
     //     model.addAttribute("users", userRepo.findAll());
     //     return "index";
     // }
+
+    @GetMapping("/addUser")
+    public String addUser(Model model){
+        UserCredentials user = new UserCredentials();
+        model.addAttribute("user", user);
+        return "addUser";
+    }
     
+    @PostMapping("/addUser")
+    public void processAddUser(@ModelAttribute("user") UserCredentials user, Model model){
+        //UserCredentials user = new UserCredentials();
+        //model.addAttribute("user", user);
+        userCredentialRepository.addUser(user.getUsername(), user.getPassword(), " ", " ", "p");
+        System.out.println(user.getUsername());
+    }
+
     @GetMapping("/")
     public String showIndex(Model model){
         //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
