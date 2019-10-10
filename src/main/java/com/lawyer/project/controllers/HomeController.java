@@ -1,5 +1,12 @@
 package com.lawyer.project.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,13 +37,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lawyer.project.UserCredentials;
 import com.lawyer.project.dao.impl.MessageDaoImpl;
@@ -105,6 +116,32 @@ public class HomeController {
         }
         return "thanks";
     }
+
+//     @PostMapping("/upload")
+//     public ResponseEntity uploadToLocalFileSystem(@RequestParam("file") MultipartFile file) {
+//         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//         Path path = Paths.get(fileBasePath + fileName);
+//         try {
+//             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+//         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                 .path("/files/download/")
+//                 .path(fileName)
+//                 .toUriString();
+//         return ResponseEntity.ok(fileDownloadUri);
+//     }
+
+//     @PostMapping("/multi-upload")
+//     public ResponseEntity multiUpload(@RequestParam("files") MultipartFile[] files) {
+//         List<Object> fileDownloadUrls = new ArrayList<>();
+//         Arrays.asList(files)
+//                 .stream()
+//                 .forEach(file -> fileDownloadUrls.add(uploadToLocalFileSystem(file).getBody()));
+//         return ResponseEntity.ok(fileDownloadUrls);
+// }
+
 
     @GetMapping("/addMail")
     public String addMail(Model model){
