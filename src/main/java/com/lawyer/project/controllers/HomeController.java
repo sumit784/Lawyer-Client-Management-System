@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import com.lawyer.project.services.EmployeeService;
 import com.lawyer.project.services.MessageService;
+import com.lawyer.project.services.NotificationService;
 import com.lawyer.project.models.Employee;
 import com.lawyer.project.models.Message;
 import com.lawyer.project.repositories.AppointmentRepository;
@@ -18,6 +19,7 @@ import com.lawyer.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.mail.MailException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -51,6 +53,8 @@ public class HomeController {
     private AppointmentRepository appointmentRepository;
     @Autowired
     private UserListCredentialRepository userListCredentialRepository;
+    @Autowired
+    private NotificationService notificationService;
 
 
     
@@ -77,7 +81,14 @@ public class HomeController {
     public void processAddUser(@ModelAttribute("user") UserCredentials user, Model model){
         //UserCredentials user = new UserCredentials();
         //model.addAttribute("user", user);
-        userCredentialRepository.addUser(user.getUsername(), user.getPassword(), " ", " ", "p");
+        userCredentialRepository.addUser(user.getUsername(), user.getPassword(), " ", user.getEmail(), "p");
+        try{
+            notificationService.sendNotification(user);
+        }catch(MailException e){
+            //catch error
+        }
+
+        
         System.out.println(user.getUsername());
     }
 
