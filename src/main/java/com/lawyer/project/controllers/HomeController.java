@@ -9,9 +9,14 @@ import com.lawyer.project.services.EmployeeService;
 import com.lawyer.project.services.MessageService;
 import com.lawyer.project.services.NotificationService;
 import com.lawyer.project.models.Employee;
+import com.lawyer.project.models.MailingList;
+import com.lawyer.project.models.MassMailBody;
 import com.lawyer.project.models.Message;
 import com.lawyer.project.repositories.AppointmentRepository;
 import com.lawyer.project.repositories.GeneralAnnouncementRepository;
+import com.lawyer.project.repositories.MailingListRepository;
+import com.lawyer.project.repositories.MassMailBodyRepository;
+import com.lawyer.project.repositories.SubscriberListMassMailing;
 import com.lawyer.project.repositories.UserCredentialRepository;
 import com.lawyer.project.repositories.UserListCredentialRepository;
 import com.lawyer.project.repositories.UserRepository;
@@ -55,6 +60,12 @@ public class HomeController {
     private UserListCredentialRepository userListCredentialRepository;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private MailingListRepository mailingListRepository;
+    @Autowired
+    private SubscriberListMassMailing subscriberListMassMailing;
+    @Autowired
+    private MassMailBodyRepository massMailBodyRepository;
 
 
     
@@ -77,6 +88,41 @@ public class HomeController {
         return "addUser";
     }
     
+    @GetMapping("/massMail")
+    public String massMail(Model model){
+        MassMailBody massmail = new MassMailBody();
+        model.addAttribute("massmail", massmail);
+        return "/massMail";
+    }
+
+    @PostMapping("/massMail")
+    public String mailAll(@ModelAttribute("massmail") MassMailBody massmail, Model model){
+        massMailBodyRepository.addBody(massmail);
+        List <MailingList> l = subscriberListMassMailing.getAllMails();
+        for(int i=0;i<l.size();i++){
+            MailingList mail = l.get(i);
+            notificationService.massMail(mail.getEmail(), massmail.getBody());
+        }
+        return "thanks";
+    }
+
+    @GetMapping("/addMail")
+    public String addMail(Model model){
+        MailingList mail = new MailingList();
+        model.addAttribute("mail", mail);
+        //mailingListRepository.addMail("venkatshanmukha793@gmail.com");
+        return "addMail";
+    }
+
+
+
+    @PostMapping("/addEmail")
+    public String addMail(@ModelAttribute("mail") MailingList mail, Model model){
+
+        mailingListRepository.addMail(mail.getEmail());
+        return "thanks";
+    }
+
     @PostMapping("/addUser")
     public void processAddUser(@ModelAttribute("user") UserCredentials user, Model model){
         //UserCredentials user = new UserCredentials();
@@ -109,7 +155,7 @@ public class HomeController {
         model.addAttribute("announcement", announcementRepo.getAnn());
 
         //announcementRepo.putAnn();
-        return "master/index";
+        return "lawyers/index";
     }
 
     @RequestMapping(value = "/1", method = RequestMethod.GET)

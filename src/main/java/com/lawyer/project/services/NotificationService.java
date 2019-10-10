@@ -31,4 +31,13 @@ public class NotificationService {
         javaMailSender.send(mail);
     }
     
+    public void massMail(String mail, String body) throws MailException{
+        //send email
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(mail);
+        email.setFrom("venkatshanmukha793@gmail.com");
+        email.setSubject("Your Weekly Law Magazine");
+        email.setText(body);
+        javaMailSender.send(email);
+    }
 }
