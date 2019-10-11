@@ -92,6 +92,11 @@ public class HomeController {
     //     return "index";
     // }
 
+    @GetMapping("/index")
+    public String showIndecks(){
+        return "index";
+    }
+
     @GetMapping("/addUser")
     public String addUser(Model model){
         UserCredentials user = new UserCredentials();
