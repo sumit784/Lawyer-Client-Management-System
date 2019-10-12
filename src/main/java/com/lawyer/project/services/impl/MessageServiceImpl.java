@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lawyer.project.dao.EmployeeDao;
+//import com.lawyer.project.dao.EmployeeDao;
 import com.lawyer.project.dao.MessageDao;
 import com.lawyer.project.models.Message;
 import com.lawyer.project.services.MessageService;
@@ -34,8 +34,8 @@ public class MessageServiceImpl implements MessageService {
 	// }
 
 	@Override
-	public Message getMessagesForUser(String username) {
-		Message message_list = messageDao.getMessageById(username);
+	public Message getMessagesForUser(Long user_id) {
+		Message message_list = messageDao.getMessageById(user_id);
         return message_list;
 	}
 

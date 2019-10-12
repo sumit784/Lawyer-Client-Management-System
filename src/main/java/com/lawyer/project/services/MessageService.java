@@ -8,6 +8,6 @@ public interface MessageService {
 	//void insertMessage(Message message);
 	//void insertMessages(List<Message> messages);
 	//void getAllMessages();
-	Message  getMessagesForUser(String username);
+	Message  getMessagesForUser(Long user_id);
 	List <Message> getAllMessages();
 }

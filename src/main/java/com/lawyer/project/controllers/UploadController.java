@@ -1,5 +1,8 @@
 package com.lawyer.project.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,20 +15,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.lawyer.project.models.Document;
+import com.lawyer.project.repositories.DocumentRepository;
+
 @Controller
 public class UploadController {
 
+    @Autowired
+    private DocumentRepository documentRepository;
+
     //Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = "/Users/narayanavenkat/desktop/uploads/";
+    private String UPLOADED_FOLDER = "/Users/narayanavenkat/desktop/uploads/";
 
     @GetMapping("/upload")
     public String index() {
-        return "upload";
+        return "/lawyers/upload";
     }
 
     @PostMapping("/upload") // //new annotation since 4.3
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
+                            
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
 
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -39,7 +51,7 @@ public class UploadController {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
             System.out.println("You successfully uploaded '" + file.getOriginalFilename() + "'");
-
+            documentRepository.addDocument(file.getOriginalFilename(), username);
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
@@ -47,7 +59,7 @@ public class UploadController {
             e.printStackTrace();
         }
 
-        return "redirect:/uploadStatus";
+        return "thanks";
     }
 
     @GetMapping("/uploadStatus")

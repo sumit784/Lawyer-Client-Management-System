@@ -8,7 +8,9 @@ import java.util.Optional;
 
 import com.lawyer.project.models.Appointment;
 import com.lawyer.project.models.GeneralAnnouncements;
+import com.lawyer.project.models.MassMailBody;
 //import com.lawyer.project.models.Users;
+import com.lawyer.project.models.Message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -23,7 +25,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MailingListRepository{
+public class MessageRepository{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -34,17 +36,21 @@ public class MailingListRepository{
     {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate ;
     }
-    public void addMail(String email) {
-        String sql="INSERT INTO mailinglist(email) values(:email)";
-        namedParameterJdbcTemplate.update(sql,getSqlParameterByModel(email));
+    public void addMessage(Message message) {
+        String sql="INSERT INTO message(body, user) values(:body,:user)";
+        namedParameterJdbcTemplate.update(sql,getSqlParameterByModel(message));
     }
 
-    private SqlParameterSource getSqlParameterByModel(String email)
+    private static SqlParameterSource getSqlParameterByModel(Message message)
     {
-        MapSqlParameterSource paramSource =new MapSqlParameterSource();
-        paramSource.addValue("id", 0);
-        paramSource.addValue("email", email);
-        return paramSource;
+	    MapSqlParameterSource paramSource =new MapSqlParameterSource();
+	    if(message!= null)
+	    {
+		    paramSource.addValue("id", message.getId());
+		    paramSource.addValue("body", message.getBody());
+		    paramSource.addValue("user", message.getUser());  
+	    }
+	    return paramSource;
     }
 
 

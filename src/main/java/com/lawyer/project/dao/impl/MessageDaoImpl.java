@@ -87,7 +87,7 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao{
     // }
 
     @Override
-    public Message getMessageById(String user) {
+    public Message getMessageById(Long user) {
         final String sql = "select * from message where user=?";
         final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] { user }, new MessageMapper());
         return rows.get(0);
@@ -99,6 +99,7 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao{
         final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] {}, new MessageMapper());
         return rows;
     }
+
 
     private static SqlParameterSource getSqlParameterByModel(Message message)
     {
@@ -119,7 +120,7 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao{
 		   Message message=new Message();
 		   message.setId(rs.getLong("id"));
 		   message.setBody(rs.getString("body"));
-		   message.setUser(rs.getString("user"));
+		   message.setUser(rs.getLong("user"));
 		   return message;
 		   
 	   }

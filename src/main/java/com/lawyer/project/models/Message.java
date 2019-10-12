@@ -18,7 +18,7 @@ public class Message {
     private Long id;
 
     private String body;
-    private String user;
+    private Long user;
 
     public Long getId(){
         return this.id;
@@ -36,11 +36,11 @@ public class Message {
         this.body = body;
     }
 
-    public String getUser(){
+    public Long getUser(){
         return this.user;
     }
 
-    public void setUser(String user){
+    public void setUser(Long user){
         this.user = user;
     }
 
@@ -48,8 +48,8 @@ public class Message {
 
     }
 
-    public Message(String username){
-        this.user = username;
+    public Message(Long user){
+        this.user = user;
     }
 
 }
