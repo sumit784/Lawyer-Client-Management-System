@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+//import org.apache.commons.lang3.StringUtils;   
+
 
 import javax.validation.Valid;
 
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 import com.lawyer.project.services.MessageService;
 import com.lawyer.project.services.NotificationService;
 import com.lawyer.project.models.Appointment;
+import com.lawyer.project.models.Cases;
 import com.lawyer.project.models.Document;
 import com.lawyer.project.models.GeneralAnnouncements;
 //import com.lawyer.project.models.Employee;
@@ -25,6 +28,7 @@ import com.lawyer.project.models.MassMailBody;
 import com.lawyer.project.models.Message;
 import com.lawyer.project.repositories.AnnouncementRepository;
 import com.lawyer.project.repositories.AppointmentRepository;
+import com.lawyer.project.repositories.CaseRepository;
 import com.lawyer.project.repositories.DocumentRepository;
 import com.lawyer.project.repositories.GeneralAnnouncementRepository;
 import com.lawyer.project.repositories.MailingListRepository;
@@ -52,6 +56,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,6 +65,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+// import net.ricecode.similarity.JaroWinklerStrategy;
+// import net.ricecode.similarity.SimilarityStrategy;
+// import net.ricecode.similarity.StringSimilarityService;
+// import net.ricecode.similarity.StringSimilarityServiceImpl;
+
+import info.debatty.java.stringsimilarity.*;
 import com.lawyer.project.UserCredentials;
 import com.lawyer.project.dao.impl.MessageDaoImpl;
 
@@ -96,6 +107,8 @@ public class HomeController {
     private MessageRepository messageRepository;
     @Autowired
     private DocumentRepository documentRepository;
+    @Autowired
+    private CaseRepository caseRepository;
 
 
     
@@ -116,14 +129,152 @@ public class HomeController {
         return "index";
     }
 
+    // @GetMapping("/editCase/{id}/")
+    // public Model editCase(Model model){
+    //     CaseRepository cas = caseRepository.getCaseById(id).get(0);
+    // }
+
+    @RequestMapping(value="/editCase/{id}", method=RequestMethod.GET)
+	public ModelAndView update(@PathVariable("id") Long id){
+	    ModelAndView model = new ModelAndView("/lawyers/editCase");
+	    Cases cas = caseRepository.getCaseById(id).get(0);
+	    model.addObject("cas", cas);
+	    return model;
+	}
+    
+
+    @RequestMapping(value="/saveCase", method=RequestMethod.POST)
+	public String pupdate(@ModelAttribute("cas") Cases cas, Model model){
+        caseRepository.UpdateCaseBy(cas);
+        System.out.println(cas.getUsername());
+	    return "thanks";
+    }
+    
+    @RequestMapping(value="/findCase", method=RequestMethod.GET)
+    public ModelAndView findCaseG(){
+        ModelAndView m = new ModelAndView("/lawyers/search");
+        // String s;
+        // s = new String();
+        // m.addObject("s", s);
+        return m;
+    }
+
+
+    @RequestMapping(value="/findCase", method=RequestMethod.POST)
+    public ModelAndView findCase(@RequestParam("s") String s){
+
+        //int d = Levenshtein.distance(s, "acciden");
+        int scored;
+        Long index;
+        int indexy;
+        index= (long) 0;
+        indexy= 0;
+        scored=100;
+        List <Cases> l = caseRepository.getAllCases();
+        ModelAndView m = new ModelAndView("/lawyers/MostRelevant");
+        //StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
+        for(int i = 0; i < l.size(); i++) {
+            if(s!=null&&l.get(i).getDescription()!=null){
+                if(Levenshtein.distance(s, l.get(i).getDescription())<scored){
+                    index= l.get(i).getId();
+                    indexy=i;
+                    scored=Levenshtein.distance(s, l.get(i).getDescription());
+                }
+            }
+            
+        }
+        System.out.println(index);
+        
+        m.addObject("legal_case", l.get(indexy));
+
+        return m;
+    }
+
+    // public static double similarity(String s1, String s2) {
+    //     String longer = s1, shorter = s2;
+    //     if (s1.length() < s2.length()) { // longer should always have greater length
+    //       longer = s2; shorter = s1;
+    //     }
+    //     int longerLength = longer.length();
+    //     if (longerLength == 0) { return 1.0; /* both strings are zero length */ }
+    //     /* // If you have Apache Commons Text, you can use it to calculate the edit distance:
+    //     LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+    //     return (longerLength - levenshteinDistance.apply(longer, shorter)) / (double) longerLength; */
+    //     return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
+    
+    //   }
+    
+    //   // Example implementation of the Levenshtein Edit Distance
+    //   // See http://rosettacode.org/wiki/Levenshtein_distance#Java
+    //   public static int editDistance(String s1, String s2) {
+    //     s1 = s1.toLowerCase();
+    //     s2 = s2.toLowerCase();
+    
+    //     int[] costs = new int[s2.length() + 1];
+    //     for (int i = 0; i <= s1.length(); i++) {
+    //       int lastValue = i;
+    //       for (int j = 0; j <= s2.length(); j++) {
+    //         if (i == 0)
+    //           costs[j] = j;
+    //         else {
+    //           if (j > 0) {
+    //             int newValue = costs[j - 1];
+    //             if (s1.charAt(i - 1) != s2.charAt(j - 1))
+    //               newValue = Math.min(Math.min(newValue, lastValue),
+    //                   costs[j]) + 1;
+    //             costs[j - 1] = lastValue;
+    //             lastValue = newValue;
+    //           }
+    //         }
+    //       }
+    //       if (i > 0)
+    //         costs[s2.length()] = lastValue;
+    //     }
+    //     return costs[s2.length()];
+    //   }
+
+    
+    // @RequestMapping(value="/findCase", method=RequestMethod.POST)
+    // public void findCase(@ModelAttribute("q") Query q, Model model){
+    //     // model.addAttribute("q", q);
+    //     // return "/lawyers/search";
+    //     //SimilarityStrategy strategy = new JaroWinklerStrategy();
+    //     String source;
+    //     source = "acciden";
+    //     System.out.println(source);
+    //     Long index;
+    //     index=(long)0;
+    //     Double scored;
+    //     scored=0.0;
+    //     List <Cases> l = caseRepository.getAllCases();
+    //     //System.out.println(l.size());
+    //     Levenshtein l1 = new Levenshtein();
+    //     //StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
+    //     for(int i = 0; i < l.size(); i++) {
+    //         if(source!=null&&l.get(i).getDescription()!=null){
+    //             if(l1.distance(source, l.get(i).getDescription())<scored){
+    //                 index= l.get(i).getId();
+    //                 scored=l1.distance(source, l.get(i).getDescription());
+    //             }
+    //         }
+            
+    //     }
+    //     System.out.println(index);
+    //     //Model model1 = new Model();
+    //     //double score = service.score(source, target); // Score is 0.90
+
+    // }
+
     
     
+
     @GetMapping("/massMail")
     public String massMail(Model model){
         MassMailBody massmail = new MassMailBody();
         model.addAttribute("massmail", massmail);
         return "/lawyers/massMail";
     }
+
 
     @PostMapping("/massMail")
     public String mailAll(@ModelAttribute("massmail") MassMailBody massmail, Model model){
@@ -134,6 +285,19 @@ public class HomeController {
             notificationService.massMail(mail.getEmail(), massmail.getBody());
         }
         return "/lawyers/massMail";
+    }
+
+    @GetMapping("/addCase")
+    public String addCase(Model model){
+        Cases cas = new Cases();
+        model.addAttribute("cas", cas);
+        return "/lawyers/addCase";
+    }
+
+    @PostMapping("/addCase")
+    public String paddCases(@ModelAttribute("cas") Cases cas, Model model){
+        caseRepository.addCase(cas.getUsername(), cas.getCaseType(), cas.getCourt_id(), cas.getJudge_id(),cas.getDescription(), cas.getJudgementDate(), cas.getPreviousHearingDate(), cas.getNextHearingDate(), cas.getStatus());
+        return "/lawyers/addCase";
     }
 
 //     @PostMapping("/upload")
@@ -210,6 +374,9 @@ public class HomeController {
         appointmentRepository.addAppointment(app.getName(), app.getAddress(), app.getReason(), app.getEmail(), app.getContactNumber(), app.getAppointmentDate());
         return "/lawyers/addApp";
     }
+
+
+    
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

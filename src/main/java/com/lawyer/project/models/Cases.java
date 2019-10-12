@@ -14,22 +14,29 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="cases")
-public class Case {
+public class Cases {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private String opponentNotice;
     private String status;
     private String description;
     private String caseType;
+    private Long judge_id;
+    private Long court_id;
     @Temporal(TemporalType.DATE)
     Date previousHearingDate;
     @Temporal(TemporalType.DATE)
     Date nextHearingDate;
     @Temporal(TemporalType.DATE)
     Date judgementDate;
+
+    
+
+    public Cases (){
+
+    }
 
     public Long getId() {
         return id;
@@ -45,14 +52,6 @@ public class Case {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getOpponentNotice() {
-        return opponentNotice;
-    }
-
-    public void setOpponentNotice(String opponentNotice) {
-        this.opponentNotice = opponentNotice;
     }
 
     public String getStatus() {
@@ -79,6 +78,22 @@ public class Case {
         this.caseType = caseType;
     }
 
+    public Long getJudge_id() {
+        return judge_id;
+    }
+
+    public void setJudge_id(Long judge_id) {
+        this.judge_id = judge_id;
+    }
+
+    public Long getCourt_id() {
+        return court_id;
+    }
+
+    public void setCourt_id(Long court_id) {
+        this.court_id = court_id;
+    }
+
     public Date getPreviousHearingDate() {
         return previousHearingDate;
     }
@@ -101,10 +116,6 @@ public class Case {
 
     public void setJudgementDate(Date judgementDate) {
         this.judgementDate = judgementDate;
-    }
-
-    public Case (){
-
     }
 
 }
