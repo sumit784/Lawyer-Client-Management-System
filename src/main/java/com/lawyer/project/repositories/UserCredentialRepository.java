@@ -47,8 +47,16 @@ public class UserCredentialRepository{
 
     public List<UserCredentials> getAllUsers() {
         final String sql = "select * from user_credentials";
-        final List<UserCredentials> rows = (List < UserCredentials >) jdbctemplate.query(sql, new Object[] {}, new UserMapper());
+        final List<UserCredentials> rows = (List < UserCredentials >) namedParameterJdbcTemplate.query(sql,
+        getSqlParameterByModel("", "", "", "", ""), new UserMapper());
         return rows;
+    }
+
+    public Long getUserIdFromUsername(String username){
+        final String sql = "select * from user_credentials where username=:username";
+        final List<UserCredentials> rows = (List < UserCredentials >) namedParameterJdbcTemplate.query(sql,
+                getSqlParameterByModel(username, "", "", "", ""), new UserMapper());
+        return rows.get(0).getId();
     }
 
     private static final class UserMapper implements RowMapper<UserCredentials>

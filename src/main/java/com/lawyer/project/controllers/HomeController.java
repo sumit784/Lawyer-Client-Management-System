@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 //import org.apache.commons.lang3.StringUtils;   
 
-
 import javax.validation.Valid;
 
 //import com.lawyer.project.services.EmployeeService;
@@ -20,8 +19,10 @@ import com.lawyer.project.services.MessageService;
 import com.lawyer.project.services.NotificationService;
 import com.lawyer.project.models.Appointment;
 import com.lawyer.project.models.Cases;
+import com.lawyer.project.models.Court;
 import com.lawyer.project.models.Document;
 import com.lawyer.project.models.GeneralAnnouncements;
+import com.lawyer.project.models.Judge;
 //import com.lawyer.project.models.Employee;
 import com.lawyer.project.models.MailingList;
 import com.lawyer.project.models.MassMailBody;
@@ -29,8 +30,10 @@ import com.lawyer.project.models.Message;
 import com.lawyer.project.repositories.AnnouncementRepository;
 import com.lawyer.project.repositories.AppointmentRepository;
 import com.lawyer.project.repositories.CaseRepository;
+import com.lawyer.project.repositories.CourtRepository;
 import com.lawyer.project.repositories.DocumentRepository;
 import com.lawyer.project.repositories.GeneralAnnouncementRepository;
+import com.lawyer.project.repositories.JudgeRepository;
 import com.lawyer.project.repositories.MailingListRepository;
 import com.lawyer.project.repositories.MassMailBodyRepository;
 import com.lawyer.project.repositories.MessageRepository;
@@ -109,6 +112,10 @@ public class HomeController {
     private DocumentRepository documentRepository;
     @Autowired
     private CaseRepository caseRepository;
+    @Autowired
+    private CourtRepository courtRepository;
+    @Autowired
+    private JudgeRepository judgeRepository;
 
 
     
@@ -126,7 +133,7 @@ public class HomeController {
 
     @GetMapping("/index")
     public String showIndecks(){
-        return "index";
+        return "/lawyers/index1";
     }
 
     // @GetMapping("/editCase/{id}/")
@@ -134,9 +141,9 @@ public class HomeController {
     //     CaseRepository cas = caseRepository.getCaseById(id).get(0);
     // }
 
-    @RequestMapping(value="/editCase/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/editCase/{id}/", method=RequestMethod.GET)
 	public ModelAndView update(@PathVariable("id") Long id){
-	    ModelAndView model = new ModelAndView("/lawyers/editCase");
+	    ModelAndView model = new ModelAndView("/lawyers/ViewEditCase");
 	    Cases cas = caseRepository.getCaseById(id).get(0);
 	    model.addObject("cas", cas);
 	    return model;
@@ -152,10 +159,7 @@ public class HomeController {
     
     @RequestMapping(value="/findCase", method=RequestMethod.GET)
     public ModelAndView findCaseG(){
-        ModelAndView m = new ModelAndView("/lawyers/search");
-        // String s;
-        // s = new String();
-        // m.addObject("s", s);
+        ModelAndView m = new ModelAndView("/lawyers/ViewSearch");
         return m;
     }
 
@@ -171,7 +175,7 @@ public class HomeController {
         indexy= 0;
         scored=100;
         List <Cases> l = caseRepository.getAllCases();
-        ModelAndView m = new ModelAndView("/lawyers/MostRelevant");
+        ModelAndView m = new ModelAndView("/lawyers/ViewMostRelevant");
         //StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
         for(int i = 0; i < l.size(); i++) {
             if(s!=null&&l.get(i).getDescription()!=null){
@@ -268,15 +272,15 @@ public class HomeController {
     
     
 
-    @GetMapping("/massMail")
+    @GetMapping("/publishJournal")
     public String massMail(Model model){
         MassMailBody massmail = new MassMailBody();
         model.addAttribute("massmail", massmail);
-        return "/lawyers/massMail";
+        return "/lawyers/publishJournal";
     }
 
 
-    @PostMapping("/massMail")
+    @PostMapping("/publishJournal")
     public String mailAll(@ModelAttribute("massmail") MassMailBody massmail, Model model){
         massMailBodyRepository.addBody(massmail);
         List <MailingList> l = subscriberListMassMailing.getAllMails();
@@ -284,7 +288,7 @@ public class HomeController {
             MailingList mail = l.get(i);
             notificationService.massMail(mail.getEmail(), massmail.getBody());
         }
-        return "/lawyers/massMail";
+        return "/lawyers/publishJournal";
     }
 
     @GetMapping("/addCase")
@@ -342,13 +346,13 @@ public class HomeController {
     public String addMail(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        if(name=="admin"){
-            MailingList mail = new MailingList();
-            model.addAttribute("mail", mail);
-            //mailingListRepository.addMail("venkatshanmukha793@gmail.com");
-            return "/lawyers/addMail";
-        }
-        return "/lawyers/login";
+        
+        MailingList mail = new MailingList();
+        model.addAttribute("mail", mail);
+        //mailingListRepository.addMail("venkatshanmukha793@gmail.com");
+        return "/lawyers/addMail1";
+        
+        //return "/lawyers/login";
         
     }
 
@@ -357,14 +361,14 @@ public class HomeController {
     @PostMapping("/addEmail")
     public String addMail(@ModelAttribute("mail") MailingList mail, Model model){
         mailingListRepository.addMail(mail.getEmail());
-        return "thanks";
+        return "/lawyers/addMail1";
     }
 
     @GetMapping("/addAppointment")
     public String addApp(Model model){
             Appointment app = new Appointment();
             model.addAttribute("app", app);
-            return "/lawyers/addApp";
+            return "/lawyers/addApp1";
     }
 
 
@@ -372,7 +376,7 @@ public class HomeController {
     @PostMapping("/addAppointment")
     public String addAppo(@ModelAttribute("app") Appointment app, Model model){
         appointmentRepository.addAppointment(app.getName(), app.getAddress(), app.getReason(), app.getEmail(), app.getContactNumber(), app.getAppointmentDate());
-        return "/lawyers/addApp";
+        return "/lawyers/addApp1";
     }
 
 
@@ -411,7 +415,7 @@ public class HomeController {
     public String addUser(Model model){
         UserCredentials user = new UserCredentials();
         model.addAttribute("user", user);
-        return "/lawyers/addUser";
+        return "/lawyers/addUser1";
     }
 
     @PostMapping("/addUser")
@@ -425,8 +429,37 @@ public class HomeController {
         }catch(MailException e){
             //catch error
         }
-        return "/lawyers/addUser";
+        return "/lawyers/addUser1";
         //System.out.println(user.getUsername());
+    }
+
+    @GetMapping("/viewMess")
+    public ModelAndView ViewMess(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        Long user_id;
+        user_id = userCredentialRepository.getUserIdFromUsername(name);
+        ModelAndView m = new ModelAndView("/lawyers/viewMess");
+        Message mess = new Message();
+        mess=messageService.getMessagesForUser(user_id);
+        m.addObject("mess", mess);
+        return m;
+
+    }
+
+    @GetMapping("/viewCase")
+    public ModelAndView ViewCase(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        // Long user_id;
+        // user_id = userCredentialRepository.getUserIdFromUsername(name);
+        ModelAndView m = new ModelAndView("/lawyers/viewCase");
+        List <Cases> l;
+        l=caseRepository.getCasesByUsername(name);
+        System.out.println(l.size());
+        m.addObject("l", l);
+        return m;
+
     }
 
     @GetMapping("/addMessage")
@@ -435,6 +468,42 @@ public class HomeController {
         model.addAttribute("message", message);
         return "/lawyers/addMessage";
     }
+
+    @GetMapping("/viewAppointments")
+    public ModelAndView addAppointments(Model model){
+        ModelAndView m = new ModelAndView("/lawyers/viewAppointments");
+        List <Appointment> l;
+        l=appointmentRepository.getAllAppointments();
+        model.addAttribute("l", l);
+        return m;
+    }
+
+    @GetMapping("/viewUsers")
+    public ModelAndView addUsers(Model model){
+        ModelAndView m = new ModelAndView("/lawyers/viewUsers");
+        List <UserCredentials> l;
+        l = userCredentialRepository.getAllUsers();
+        model.addAttribute("l", l);
+        return m;
+    }
+
+    @GetMapping("/viewAllCases")
+    public ModelAndView viewAllCases (Model model){
+        ModelAndView m = new ModelAndView("/lawyers/viewAllCases");
+        List <Cases> l;
+        l = caseRepository.getAllCases();
+        model.addAttribute("l", l);
+        return m;
+    }
+
+    // @GetMapping("/publishJournal")
+    // public ModelAndView publishJournal (Model model){
+    //     ModelAndView m = new ModelAndView("/lawyers/publishJournal");
+    //     List <Cases> l;
+    //     l = caseRepository.getAllCases();
+    //     model.addAttribute("l", l);
+    //     return m;
+    // }
 
     @PostMapping("/addMessage")
     public String processAddMess(@ModelAttribute("message") Message message, Model model){
@@ -450,10 +519,11 @@ public class HomeController {
         //System.out.println(user.getUsername());
     }
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String showIndex(Model model){
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //String name = auth.getName();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        //announcementRepo.getAnn()
         //Message m = messageService.getMessagesForUser(name);
         //System.out.println(m.getBody());
         //List <Message> n = messageService.getAllMessages();
@@ -463,11 +533,31 @@ public class HomeController {
         //Date date = new Date();
         //appointmentRepository.addAppointment("venky", "varanasi", "fun", "email", "contact_number", date);
         //appointmentRepository.addAppointment("donky", "varanasi", "fun", "email", "contact_number", date);
-        System.out.println(userListCredentialRepository.getAllUsers().size());
-        model.addAttribute("announcement", announcementRepo.getAnn());
-
+        // System.out.println(userListCredentialRepository.getAllUsers().size());
+        // model.addAttribute("announcement", announcementRepo.getAnn());
+        List <Judge> j;
+        j=judgeRepository.getAllJudges();
+        List <Court> c;
+        c=courtRepository.getAllCourts();
+        model.addAttribute("judgelist", j);
+        model.addAttribute("courtlist", c);
+        String s;
+        if(name.equals("admin")){
+            s =  "/lawyers/AdminHome";
+            
+        }
+        else s =  "/lawyers/ClientHome";
+        return s;
         //announcementRepo.putAnn();
-        return "lawyers/index";
+        //return "lawyers/index";
+    }
+
+    @GetMapping("/viewAnn")
+    public ModelAndView showgenann(){
+        ModelAndView m = new ModelAndView("/lawyers/viewAnn");
+        String s = announcementRepo.getAnn();
+        m.addObject("s", s);
+        return m;
     }
 
     // @RequestMapping(value = "/1", method = RequestMethod.GET)
@@ -478,7 +568,7 @@ public class HomeController {
 
     @GetMapping("/login")
     public String loginPage(){
-        return "/lawyers/login";
+        return "/lawyers/DefaultHome";
     }
 
     @GetMapping("/logout-success")
@@ -486,10 +576,10 @@ public class HomeController {
         return "logout";
     }
 
-    @GetMapping("/home")
-    public String homepage(){
-        return "home";
-    }
+    // @GetMapping("/home")
+    // public String homepage(){
+    //     return "home";
+    // }
 
 
     
@@ -505,11 +595,10 @@ public class HomeController {
 
     @GetMapping("/downloads")
     public ModelAndView download(){
-        ModelAndView model = new ModelAndView("/lawyers/download");
+        ModelAndView model = new ModelAndView("/lawyers/ViewDownload");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         List <Document> obj = documentRepository.getDocumentByUsername(name);
-        //System.out.println(obj.size());
         model.addObject("obj",obj);
         return model;
     }

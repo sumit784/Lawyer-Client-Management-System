@@ -88,7 +88,7 @@ public class MessageDaoImpl extends JdbcDaoSupport implements MessageDao{
 
     @Override
     public Message getMessageById(Long user) {
-        final String sql = "select * from message where user=?";
+        final String sql = "select * from message where user=? order by id desc";
         final List<Message> rows = (List < Message >) jdbcTemplate.query(sql, new Object[] { user }, new MessageMapper());
         return rows.get(0);
     }

@@ -29,7 +29,7 @@ public class UploadController {
 
     @GetMapping("/upload")
     public String index() {
-        return "/lawyers/upload";
+        return "/lawyers/viewupload";
     }
 
     @PostMapping("/upload") // //new annotation since 4.3
