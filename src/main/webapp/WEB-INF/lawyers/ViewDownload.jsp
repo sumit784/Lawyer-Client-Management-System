@@ -15,7 +15,7 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1 style="color: brown;">Narayana's Lawyers & Legal Consultancy</h1>
+<h1 >Narayana's Lawyers & Legal Consultancy</h1>
 <!-- <p style="color: brown;"><i>Justice Always Prevails</i> -->
 </p>
 </div>

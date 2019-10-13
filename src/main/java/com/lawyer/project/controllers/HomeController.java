@@ -141,20 +141,14 @@ public class HomeController {
     //     CaseRepository cas = caseRepository.getCaseById(id).get(0);
     // }
 
-    @RequestMapping(value="/editCase/{id}/", method=RequestMethod.GET)
-	public ModelAndView update(@PathVariable("id") Long id){
-	    ModelAndView model = new ModelAndView("/lawyers/ViewEditCase");
-	    Cases cas = caseRepository.getCaseById(id).get(0);
-	    model.addObject("cas", cas);
-	    return model;
-	}
+    
     
 
     @RequestMapping(value="/saveCase", method=RequestMethod.POST)
 	public String pupdate(@ModelAttribute("cas") Cases cas, Model model){
         caseRepository.UpdateCaseBy(cas);
         System.out.println(cas.getUsername());
-	    return "thanks";
+	    return "/lawyers/AdminHome";
     }
     
     @RequestMapping(value="/findCase", method=RequestMethod.GET)
@@ -466,7 +460,7 @@ public class HomeController {
     public String addMess(Model model){
         Message message = new Message();
         model.addAttribute("message", message);
-        return "/lawyers/addMessage";
+        return "/lawyers/AddMessageView";
     }
 
     @GetMapping("/viewAppointments")
@@ -496,6 +490,23 @@ public class HomeController {
         return m;
     }
 
+    // @GetMapping("/viewAllCases")
+    // public ModelAndView viewAllCases (Model model){
+    //     ModelAndView m = new ModelAndView("/lawyers/viewAllCases");
+    //     List <Cases> l;
+    //     l = caseRepository.getAllCases();
+    //     model.addAttribute("l", l);
+    //     return m;
+    // }
+
+    @RequestMapping(value="/editCase/{id}/", method=RequestMethod.GET)
+	public ModelAndView update(@PathVariable("id") Long id){
+	    ModelAndView model = new ModelAndView("/lawyers/ViewEditCase");
+	    Cases cas = caseRepository.getCaseById(id).get(0);
+	    model.addObject("cas", cas);
+	    return model;
+	}
+
     // @GetMapping("/publishJournal")
     // public ModelAndView publishJournal (Model model){
     //     ModelAndView m = new ModelAndView("/lawyers/publishJournal");
@@ -515,7 +526,7 @@ public class HomeController {
         // }catch(MailException e){
         //     //catch error
         // }
-        return "/lawyers/addMessage";
+        return "/lawyers/AddMessageView";
         //System.out.println(user.getUsername());
     }
 

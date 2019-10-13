@@ -5,10 +5,10 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Title goes here</title>
+  <title>Admin Panel</title>
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
   <style>
         table {
           font-family: arial, sans-serif;
@@ -32,23 +32,25 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1>Your Company</h1>
+<h1>Narayana's Lawyers & Legal Consultancy</h1>
 </div>
 <div class="menu">
 <ul>
-  <li><a href="index.html">Appointments</a></li>
-  <li><a href="#">Users</a></li>
-  <li><a href="#">Cases</a></li>
-  <li><a href="#">Cases</a></li>
-  <li><a href="#">Add Users</a></li>
-  <li><a href="#">Publish Journal</a></li>
+    <li><a href="http://localhost:8080/home">Home</a></li>
+    <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
+    <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
+    <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
+    <li><a href="http://localhost:8080/findCase">Search Cases</a></li>
+    <li><a href="http://localhost:8080/addUser">New Client</a></li>
+    <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
+    <li><a href="http://localhost:8080/addMessage">Message</a></li>     
 </ul>
 </div>
 </div>
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">Welcome to our site</h2>
+<h2 class="title">Registered Clients List</h2>
 <p>&nbsp;</p>
 <table>
         <tr>
@@ -65,7 +67,7 @@
                 <td>${il.address}</td>
               </tr>
           </c:forEach></table>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
 id purus nisi, in rutrum nunc. Donec non orci eros, ut sollicitudin
 risus. Vivamus at lacinia enim. Nam tincidunt nisl eget erat
 sollicitudin vitae accumsan felis eleifend. Phasellus eu ante non magna
@@ -79,8 +81,8 @@ augue tortor, porta et malesuada dapibus, tempor ut mauris. Nullam
 dictum posuere ante at tincidunt. Praesent sed lorem enim, vitae
 scelerisque dui. Etiam ac purus est, et accumsan sem. In hac habitasse
 platea dictumst. Maecenas a dui leo, sit amet dignissim nisi. </p>
-<p>&nbsp;</p>
-Nam sit amet arcu nisi. Proin sagittis, nisi sed sollicitudin
+<p>&nbsp;</p> -->
+<!-- Nam sit amet arcu nisi. Proin sagittis, nisi sed sollicitudin
 elementum, urna justo porta enim, nec semper massa nunc non eros.
 Nullam molestie, quam quis egestas porta, ligula elit laoreet ante, a
 convallis lectus sem volutpat urna. Donec congue purus placerat quam
@@ -95,9 +97,9 @@ nulla suscipit a. Nullam ultricies varius orci, nec pharetra quam
 accumsan id. Donec vel nulla quis sem aliquet suscipit. Aenean at
 lectus mauris, non tristique dui. Curabitur eu diam mi, eget blandit
 dolor.
+<p>&nbsp;</p> -->
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<h2 class="title">Recent articles<br>
+<!-- <h2 class="title">Recent articles<br>
 </h2>
 <p>&nbsp;</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
@@ -114,16 +116,15 @@ augue tortor, porta et malesuada dapibus, tempor ut mauris. Nullam
 dictum posuere ante at tincidunt. Praesent sed lorem enim, vitae
 scelerisque dui. Etiam ac purus est, et accumsan sem. In hac habitasse
 platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
-<br>
+<br> -->
 </p>
 </div>
 </div>
-<!--Designed by--><a href="http://www.htmltemplates.net">
-<img src="images/header.jpg" class="copyright" alt="HTML Templates"></a>
+
 <div class="right-panel">
 <div class="right-panel-in">
 
-<h3>Categories</h3>
+<!-- <h3>Categories</h3>
 <ul>
   <li><a href="#">Link item 1<br>
     </a></li>
@@ -152,7 +153,7 @@ platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
     </a></li>
   <li><a href="index.html#">Blogroll link 6<br>
     </a></li>
-</ul>
+</ul> -->
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -163,8 +164,8 @@ platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
 </div>
 </div>
 <div class="footer">
-<p>&copy; Copyright 2014. Designed by <a target="_blank" href="http://www.htmltemplates.net">htmltemplates.net</a>
-</p>
+        <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
+            </p>
 </div>
 </div>
 </div>

@@ -15,7 +15,7 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1 style="color: brown;">Narayana's Lawyers & Legal Consultancy</h1>
+<h1 >Narayana's Lawyers & Legal Consultancy</h1>
 <!-- <p style="color: brown;"><i>Justice Always Prevails</i> -->
 </p>
 </div>
@@ -24,7 +24,7 @@
   <li><a href="http://localhost:8080/home">Home</a></li>
   <li><a href="http://localhost:8080/viewAnn">General Announcements</a></li>
   <li><a href="http://localhost:8080/viewMess">Messages from the lawyer</a></li>
-  <li><a href="http://localhost:8080/home/viewCase">My Cases</a></li>
+  <li><a href="http://localhost:8080/viewCase">My Cases</a></li>
   <li><a href="http://localhost:8080/downloads">My Documents</a></li>
   <li><a href="http://localhost:8080/upload">Upload files</a></li>
 </ul>

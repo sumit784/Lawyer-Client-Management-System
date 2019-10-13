@@ -8,15 +8,33 @@
   <title>Narayana's Lawyers and Legal Consultancy</title>
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+  <style>
+    
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+  
+  </style>
 </head>
 <body>
 <div class="main">
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1 style="color: brown;">Narayana's Lawyers & Legal Consultancy</h1>
-<!-- <p style="color: brown;"><i>Justice Always Prevails</i> -->
+<h1 >Narayana's Lawyers & Legal Consultancy</h1>
 </p>
 </div>
 <div class="menu">
@@ -35,6 +53,9 @@
 <div class="left-panel-in">
 <h2 class="title">Welcome to the Client Home Page</h2>
 
+<br>
+<strong><p>Judges List</p></strong>
+<br>
 <table>
     <tr>
         <th>Judge Id</th>
@@ -46,7 +67,11 @@
             <td>${j.name}</td>
             </tr>
       </c:forEach></table>
-      <table>
+
+<br>
+<strong><p>Courts List</p></strong>
+<br>  
+<table>
           <tr>
               <th>Court Id</th>
               <th>Court Name</th>

@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Narayana's Lawyers and Legal Consultancy</title>
+  <title>Admin Panel</title>
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
   <link href="css/style.css" rel="stylesheet" type="text/css">
@@ -15,25 +15,28 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1 style="color: brown;">Narayana's Lawyers & Legal Consultancy</h1>
+<h1>Narayana's Lawyers & Legal Consultancy</h1>
 <!-- <p style="color: brown;"><i>Justice Always Prevails</i> -->
 </p>
 </div>
 <div class="menu">
 <ul>
-  <li><a href="http://localhost:8080/home">Home</a></li>
-  <li><a href="http://localhost:8080/viewAnn">General Announcements</a></li>
-  <li><a href="http://localhost:8080/viewMess">Messages from the lawyer</a></li>
-  <li><a href="http://localhost:8080/home/viewCase">My Cases</a></li>
-  <li><a href="http://localhost:8080/downloads">My Documents</a></li>
-  <li><a href="http://localhost:8080/upload">Upload files</a></li>
+        <li><a href="http://localhost:8080/home">Home</a></li>
+        <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
+        <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
+        <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
+        <li><a href="http://localhost:8080/findCase">Search Cases</a></li>
+        <li><a href="http://localhost:8080/addUser">New Client</a></li>
+        <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
+        <li><a href="http://localhost:8080/addMessage">Message</a></li>
+      
 </ul>
 </div>
 </div>
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">Messages from the Lawyer</h2>
+<h2 class="title">Search for Cases</h2>
 <p>&nbsp;</p>
 <form id='login-form' action="/findCase" method='POST' modelAttribute="q">
     <input type="text" placeholder="Write your query here.." name="s" required>

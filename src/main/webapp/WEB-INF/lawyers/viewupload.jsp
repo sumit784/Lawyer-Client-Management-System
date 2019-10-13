@@ -15,7 +15,7 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1 style="color: brown;">Narayana's Lawyers & Legal Consultancy</h1>
+<h1>Narayana's Lawyers & Legal Consultancy</h1>
 <!-- <p style="color: brown;"><i>Justice Always Prevails</i> -->
 </p>
 </div>
@@ -33,7 +33,7 @@
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">General Announcements from the Lawyer</h2>
+<h2 class="title">Upload My Documents</h2>
 <p>&nbsp;</p>
 <form:form id='login-form' action="/upload" method='POST' enctype="multipart/form-data">
                 <p style="color:crimson;font-size:20px;font-weight: bold;">

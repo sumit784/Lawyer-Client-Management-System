@@ -1,14 +1,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Narayana's Lawyers and Legal Consultancy</title>
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
-  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
   <style>
     body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -176,9 +176,8 @@ a:hover {
 <div class="page">
 <div class="header">
 <!-- <div class="header-img">
-<h1>Your Company</h1>
-<p>Slogan Goes Here</p>
-</div> -->
+<h1>Narayana's Lawyers and Legal Consultancy</h1>
+</div>  -->
 <div class="menu">
 <ul>
   <li><a href="#">Home</a></li>
@@ -267,4 +266,4 @@ Please feel free to subscribe to my Weekly Law Journal.
 </div>
 </div>
 
-</body></html>
+</body>

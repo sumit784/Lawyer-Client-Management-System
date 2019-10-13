@@ -32,8 +32,8 @@
 <div class="page">
 <div class="header">
 <div class="header-img">
-<h1>Your Company</h1>
-</div>
+        <h1>Narayana's Lawyers & Legal Consultancy</h1>
+    </div>
 <div class="menu">
 <ul>
         <li><a href="http://localhost:8080/home">Home</a></li>
@@ -41,43 +41,22 @@
         <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
         <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
         <li><a href="http://localhost:8080/findCase">Search Cases</a></li>
-        <li><a href="http://localhost:8080/addUser">Client Registration</a></li>
-        <li><a href="http://localhost:8080/publishJournal">Publish Journal</a></li>
-      
+        <li><a href="http://localhost:8080/addUser">New Client</a></li>
+        <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
+        <li><a href="http://localhost:8080/addMessage">Message</a></li>
 </ul>
 </div>
 </div>
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">Search Results</h2>
+<h2 class="title">Send A Message to Client</h2>
 <p>&nbsp;</p>
-<!-- ${legal_case.description}
-${legal_case.id} -->
-<table>
-        <tr>
-            <th>Username</th>
-            <th>Status</th>
-            <th>Description</th>
-            <th>Case Type</th>
-            <th>Judge Id</th>
-            <th>Court Id</th>
-            <th>Previous Hearing Date</th>
-            <th>Next Hearing Date</th>
-            <th>Judgement Date</th>
-          </tr>
-              <tr>
-                <td>${legal_case.username}</td>
-                <td>${legal_case.status}</td>
-                <td>${legal_case.description}</td>
-                <td>${legal_case.caseType}</td>
-                <td>${legal_case.judge_id}</td>
-                <td>${legal_case.court_id}</td>
-                <td>${legal_case.previousHearingDate}</td>
-                <td>${legal_case.nextHearingDate}</td>
-                <td>${legal_case.judgementDate}</td>
-              </tr>
-          </table>
+<form:form id='login-form' action="/addMessage" method='POST' modelAttribute="message">
+                    <form:input path="body" type='text' placeholder="Enter the Message body..."/>
+                    <form:input path="user" type='text' placeholder="Enter the UserId.."/>
+                    <input name="submit" type="submit" value="submit" />
+                </form:form>
 <!-- <table>
         <tr>
             <th>Username</th>
@@ -132,10 +111,10 @@ sem, ac pharetra felis. Praesent tincidunt interdum neque, et semper
 nulla suscipit a. Nullam ultricies varius orci, nec pharetra quam
 accumsan id. Donec vel nulla quis sem aliquet suscipit. Aenean at
 lectus mauris, non tristique dui. Curabitur eu diam mi, eget blandit
-dolor. -->
+dolor.
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<!-- <h2 class="title">Recent articles<br>
+<h2 class="title">Recent articles<br>
 </h2>
 <p>&nbsp;</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
@@ -151,16 +130,16 @@ Integer interdum suscipit urna, nec interdum nisi aliquet et. Quisque
 augue tortor, porta et malesuada dapibus, tempor ut mauris. Nullam
 dictum posuere ante at tincidunt. Praesent sed lorem enim, vitae
 scelerisque dui. Etiam ac purus est, et accumsan sem. In hac habitasse
-platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br> -->
+platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
 <br>
-</p>
+</p> -->
 </div>
 </div>
 
 <div class="right-panel">
 <div class="right-panel-in">
-<!-- 
-<h3>Categories</h3>
+
+<!-- <h3>Categories</h3>
 <ul>
   <li><a href="#">Link item 1<br>
     </a></li>
