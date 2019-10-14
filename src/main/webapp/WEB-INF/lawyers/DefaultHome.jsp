@@ -8,7 +8,7 @@
   <title>Narayana's Lawyers and Legal Consultancy</title>
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
-  <link href="/css/style.css" rel="stylesheet" type="text/css">
+  <!-- <link href="/css/style.css" rel="stylesheet" type="text/css"> -->
   <style>
     body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;

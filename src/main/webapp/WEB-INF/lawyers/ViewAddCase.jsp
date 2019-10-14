@@ -9,23 +9,6 @@
   <meta name="description" content="Description of your site goes here">
   <meta name="keywords" content="keyword1, keyword2, keyword3">
   <link href="css/style.css" rel="stylesheet" type="text/css">
-  <style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  </style>
 </head>
 <body>
 <div class="main">
@@ -38,43 +21,34 @@
 </div>
 <div class="menu">
 <ul>
-  <li><a href="http://localhost:8080/home">Home</a></li>
-  <li><a href="http://localhost:8080/viewAnn">General Announcements</a></li>
-  <li><a href="http://localhost:8080/viewMess">Messages from the lawyer</a></li>
-  <li><a href="http://localhost:8080/viewCase">My Cases</a></li>
-  <li><a href="http://localhost:8080/downloads">My Documents</a></li>
-  <li><a href="http://localhost:8080/upload">Upload files</a></li>
+        <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
+        <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
+        <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
+        <li><a href="http://localhost:8080/addCase">New Case</a></li>
+        <li><a href="http://localhost:8080/findCase">Search</a></li>
+        <li><a href="http://localhost:8080/addUser">New Client</a></li>
+        <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
+        <li><a href="http://localhost:8080/addMessage">Message</a></li>
 </ul>
 </div>
 </div>
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">My Cases</h2>
+<h2 class="title">General Announcements from the Lawyer</h2>
 <p>&nbsp;</p>
-<table>
-<tr>
-    <th>Case Type</th>
-    <th>Court Id</th>
-    <th>Description</th>
-    <th>Judge Id</th>
-    <th>Judgement Date</th>
-    <th>Next Hearing Date</th>
-    <th>Previous Hearing Date</th>
-    <th>Case status</th>
-  </tr>
-  <c:forEach items="${l}" var="il">
-      <tr>
-        <td>${il.caseType}</td>
-        <td>${il.court_id}</td>
-        <td>${il.description}</td>
-        <td>${il.judge_id}</td>
-        <td>${il.nextHearingDate}</td>
-        <td>${il.previousHearingDate}</td>
-        <td>${il.judgementDate}</td>
-        <td>${il.status}</td>
-        </tr>
-  </c:forEach></table>
+<form:form id='login-form' action="/addCase" method='POST' modelAttribute="cas">
+                    <form:input path="username" type='text' placeholder="Enter the username"/>
+                    <form:input path="description" type='text' placeholder="Enter the description"/>
+                    <form:input path="status" type='text' placeholder="Enter the status"/>
+                    <form:input path="caseType" type='text' placeholder="Enter the case type"/>
+                    <form:input path="judge_id" type='text' placeholder="Enter the Judge no.."/>
+                    <form:input path="court_id" type='text' placeholder="Enter the Court no.."/>
+                    <form:input path="previousHearingDate" type='date' placeholder="Enter the previous hearing date"/>
+                    <form:input path="nextHearingDate" type='date' placeholder="Enter the next hearing date"/>
+                    <form:input path="judgementDate" type='date' placeholder="Enter the judgement date"/>
+                    <input name="submit" type="submit" value="submit" />
+                </form:form>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

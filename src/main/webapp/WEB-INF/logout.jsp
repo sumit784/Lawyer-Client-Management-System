@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Logout home <br>
-	<a href="/">home</a>
+	<a href="/">Let's Go Home</a>
 </body>
 </html>
+
+
+
+

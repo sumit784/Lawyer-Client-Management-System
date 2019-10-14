@@ -50,31 +50,9 @@
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">My Cases</h2>
+<h2 class="title">Success</h2>
 <p>&nbsp;</p>
-<table>
-<tr>
-    <th>Case Type</th>
-    <th>Court Id</th>
-    <th>Description</th>
-    <th>Judge Id</th>
-    <th>Judgement Date</th>
-    <th>Next Hearing Date</th>
-    <th>Previous Hearing Date</th>
-    <th>Case status</th>
-  </tr>
-  <c:forEach items="${l}" var="il">
-      <tr>
-        <td>${il.caseType}</td>
-        <td>${il.court_id}</td>
-        <td>${il.description}</td>
-        <td>${il.judge_id}</td>
-        <td>${il.nextHearingDate}</td>
-        <td>${il.previousHearingDate}</td>
-        <td>${il.judgementDate}</td>
-        <td>${il.status}</td>
-        </tr>
-  </c:forEach></table>
+<strong><p>Your document has been successfully uploaded</p></strong>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

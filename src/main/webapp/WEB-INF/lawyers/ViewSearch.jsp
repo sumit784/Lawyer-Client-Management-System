@@ -21,14 +21,14 @@
 </div>
 <div class="menu">
 <ul>
-        <li><a href="http://localhost:8080/home">Home</a></li>
-        <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
-        <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
-        <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
-        <li><a href="http://localhost:8080/findCase">Search Cases</a></li>
-        <li><a href="http://localhost:8080/addUser">New Client</a></li>
-        <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
-        <li><a href="http://localhost:8080/addMessage">Message</a></li>
+    <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
+    <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
+    <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
+    <li><a href="http://localhost:8080/addCase">New Case</a></li>
+    <li><a href="http://localhost:8080/findCase">Search</a></li>
+    <li><a href="http://localhost:8080/addUser">New Client</a></li>
+    <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
+    <li><a href="http://localhost:8080/addMessage">Message</a></li>
       
 </ul>
 </div>
@@ -101,8 +101,8 @@
 </div>
 </div>
 <div class="footer">
-        <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
-            </p>
+  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+  </p>
 </div>
 </div>
 </div>

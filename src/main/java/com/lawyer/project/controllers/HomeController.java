@@ -131,9 +131,9 @@ public class HomeController {
     //     return "index";
     // }
 
-    @GetMapping("/index")
+    @GetMapping("/error")
     public String showIndecks(){
-        return "/lawyers/index1";
+        return "/error";
     }
 
     // @GetMapping("/editCase/{id}/")
@@ -146,6 +146,9 @@ public class HomeController {
 
     @RequestMapping(value="/saveCase", method=RequestMethod.POST)
 	public String pupdate(@ModelAttribute("cas") Cases cas, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         caseRepository.UpdateCaseBy(cas);
         System.out.println(cas.getUsername());
 	    return "/lawyers/AdminHome";
@@ -153,6 +156,12 @@ public class HomeController {
     
     @RequestMapping(value="/findCase", method=RequestMethod.GET)
     public ModelAndView findCaseG(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
         ModelAndView m = new ModelAndView("/lawyers/ViewSearch");
         return m;
     }
@@ -160,6 +169,13 @@ public class HomeController {
 
     @RequestMapping(value="/findCase", method=RequestMethod.POST)
     public ModelAndView findCase(@RequestParam("s") String s){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
 
         //int d = Levenshtein.distance(s, "acciden");
         int scored;
@@ -268,6 +284,9 @@ public class HomeController {
 
     @GetMapping("/publishJournal")
     public String massMail(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         MassMailBody massmail = new MassMailBody();
         model.addAttribute("massmail", massmail);
         return "/lawyers/publishJournal";
@@ -276,6 +295,9 @@ public class HomeController {
 
     @PostMapping("/publishJournal")
     public String mailAll(@ModelAttribute("massmail") MassMailBody massmail, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         massMailBodyRepository.addBody(massmail);
         List <MailingList> l = subscriberListMassMailing.getAllMails();
         for(int i=0;i<l.size();i++){
@@ -287,15 +309,21 @@ public class HomeController {
 
     @GetMapping("/addCase")
     public String addCase(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         Cases cas = new Cases();
         model.addAttribute("cas", cas);
-        return "/lawyers/addCase";
+        return "/lawyers/ViewAddCase";
     }
 
     @PostMapping("/addCase")
     public String paddCases(@ModelAttribute("cas") Cases cas, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         caseRepository.addCase(cas.getUsername(), cas.getCaseType(), cas.getCourt_id(), cas.getJudge_id(),cas.getDescription(), cas.getJudgementDate(), cas.getPreviousHearingDate(), cas.getNextHearingDate(), cas.getStatus());
-        return "/lawyers/addCase";
+        return "/lawyers/ViewAddCase";
     }
 
 //     @PostMapping("/upload")
@@ -325,6 +353,9 @@ public class HomeController {
 
     @GetMapping("/addAnnouncement")
     public String addAnnouncements(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         GeneralAnnouncements g = new GeneralAnnouncements();
         model.addAttribute("g", g);
         return "/lawyers/addAnn";
@@ -332,6 +363,9 @@ public class HomeController {
 
     @PostMapping("/addAnnouncement")
     public String paddAnnouncement(@ModelAttribute("g") GeneralAnnouncements g, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         annRepo.addAnnouncement(g.getText());
         return "/lawyers/addAnn";
     }
@@ -407,6 +441,9 @@ public class HomeController {
 
     @GetMapping("/addUser")
     public String addUser(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         UserCredentials user = new UserCredentials();
         model.addAttribute("user", user);
         return "/lawyers/addUser1";
@@ -414,6 +451,9 @@ public class HomeController {
 
     @PostMapping("/addUser")
     public String processAddUser(@ModelAttribute("user") UserCredentials user, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         //UserCredentials user = new UserCredentials();
         //model.addAttribute("user", user);
         userCredentialRepository.addUser(user.getUsername(), user.getPassword(), user.getAddress(), user.getEmail(), user.getPhone());
@@ -436,6 +476,10 @@ public class HomeController {
         ModelAndView m = new ModelAndView("/lawyers/viewMess");
         Message mess = new Message();
         mess=messageService.getMessagesForUser(user_id);
+        if(mess.getBody()==null){
+            ModelAndView n = new ModelAndView("/lawyers/NoMessage");
+            return n;
+        }
         m.addObject("mess", mess);
         return m;
 
@@ -458,6 +502,9 @@ public class HomeController {
 
     @GetMapping("/addMessage")
     public String addMess(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         Message message = new Message();
         model.addAttribute("message", message);
         return "/lawyers/AddMessageView";
@@ -465,6 +512,12 @@ public class HomeController {
 
     @GetMapping("/viewAppointments")
     public ModelAndView addAppointments(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
         ModelAndView m = new ModelAndView("/lawyers/viewAppointments");
         List <Appointment> l;
         l=appointmentRepository.getAllAppointments();
@@ -474,6 +527,12 @@ public class HomeController {
 
     @GetMapping("/viewUsers")
     public ModelAndView addUsers(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
         ModelAndView m = new ModelAndView("/lawyers/viewUsers");
         List <UserCredentials> l;
         l = userCredentialRepository.getAllUsers();
@@ -483,6 +542,12 @@ public class HomeController {
 
     @GetMapping("/viewAllCases")
     public ModelAndView viewAllCases (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
         ModelAndView m = new ModelAndView("/lawyers/viewAllCases");
         List <Cases> l;
         l = caseRepository.getAllCases();
@@ -501,6 +566,12 @@ public class HomeController {
 
     @RequestMapping(value="/editCase/{id}/", method=RequestMethod.GET)
 	public ModelAndView update(@PathVariable("id") Long id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")){
+            ModelAndView n = new ModelAndView("SecurityBreach");
+            return n;
+        }
 	    ModelAndView model = new ModelAndView("/lawyers/ViewEditCase");
 	    Cases cas = caseRepository.getCaseById(id).get(0);
 	    model.addObject("cas", cas);
@@ -518,6 +589,9 @@ public class HomeController {
 
     @PostMapping("/addMessage")
     public String processAddMess(@ModelAttribute("message") Message message, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(!name.equals("admin")) return "SecurityBreach";
         //UserCredentials user = new UserCredentials();
         //model.addAttribute("user", user);
         messageRepository.addMessage(message);
@@ -584,7 +658,7 @@ public class HomeController {
 
     @GetMapping("/logout-success")
     public String logoutPage(){
-        return "logout";
+        return "redirect:/";
     }
 
     // @GetMapping("/home")
@@ -599,10 +673,10 @@ public class HomeController {
     //     return "home";
     // }
 
-    @GetMapping("/admin")
-    public String admin(){
-        return "admin";
-    }
+    // @GetMapping("/admin")
+    // public String admin(){
+    //     return "admin";
+    // }
 
     @GetMapping("/downloads")
     public ModelAndView download(){
@@ -612,6 +686,17 @@ public class HomeController {
         List <Document> obj = documentRepository.getDocumentByUsername(name);
         model.addObject("obj",obj);
         return model;
+    }
+
+
+    @GetMapping("/")
+    public String homer(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        if(name.equals("admin")){
+            return "redirect:/home";
+        }
+        else return "redirect:/home";
     }
     // @RequestMapping(value = "/addEmployee", method=RequestMethod.GET)
     // public ModelAndView show() {

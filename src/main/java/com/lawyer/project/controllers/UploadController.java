@@ -59,7 +59,7 @@ public class UploadController {
             e.printStackTrace();
         }
 
-        return "thanks";
+        return "/lawyers/thanks";
     }
 
     @GetMapping("/uploadStatus")

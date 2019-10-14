@@ -1,0 +1,21 @@
+1. create database lawyer;
+
+2. Change the Root Password
+
+3. Insert into user_credentials and user_clone a new user with Username:"admin" and Password:"admin"
+
+4. alter table message add constraint foreign key (user) references user_clone(id);
+
+5. alter table user_clone add unique (username);
+
+6. alter table documents  add constraint foreign key (username) references user_clone(username);
+
+7. alter table cases add constraint foreign key (court_id) references court(id); 
+
+8. alter table cases add constraint foreign key (judge_id) references judge(id);
+
+9. alter table cases add constraint foreign key (username) references user_clone(username);
+
+10. insert into user_clone values(1, "Room no: 144, Visvesvaraya Hostel", "venkatshanmukha793@gmail.com", "admin", "9182733499", "admin");
+
+11. insert into user_credentials values (1, "admin", "admin", "Room no: 144, Visvesvaraya Hostel", "venkatshanmukha793@gmail.com", "9182733499");

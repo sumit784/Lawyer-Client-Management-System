@@ -162,8 +162,8 @@ platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
 </div>
 </div>
 <div class="footer">
-        <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
-            </p>
+  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+  </p>
 </div>
 </div>
 </div>

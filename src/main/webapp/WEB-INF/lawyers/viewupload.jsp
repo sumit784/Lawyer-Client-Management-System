@@ -36,8 +36,8 @@
 <h2 class="title">Upload My Documents</h2>
 <p>&nbsp;</p>
 <form:form id='login-form' action="/upload" method='POST' enctype="multipart/form-data">
-                <p style="color:crimson;font-size:20px;font-weight: bold;">
-                        File name must contain your username too.
+                <p style="font-weight: bold;">
+                        File name must contain your username preferably.
                       </p>
                     <input type="file" name="file" /><br/><br/>
                     <input name="submit" type="submit" value="submit" />
@@ -107,8 +107,8 @@
 </div>
 </div>
 <div class="footer">
-        <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
-            </p>
+  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+  </p>
 </div>
 </div>
 </div>

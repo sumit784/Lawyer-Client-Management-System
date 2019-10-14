@@ -26,31 +26,188 @@
             })
         }
         </script>
+  <style>
+    body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	background-color: #d7d7bd;
+	margin: 30px;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol, li, form, input, textarea {
+	padding: 0px;
+	margin: 0px;
+}
+a {
+	color: #035c7a;
+	text-decoration: underline;
+}
+a:hover {
+	color: #035c7a;
+	text-decoration: none;
+}
+.main {
+	width: 840px;
+	margin: 0px auto;
+}
+.page {
+	background-color: #FFFFFF;
+	width: 800px;
+	float: left;
+	padding: 20px;
+}
+.header {
+	width: 800px;
+	float: left;
+}
+.header-img {
+	background-image: url(../images/header.jpg);
+	background-repeat: no-repeat;
+	background-position: left top;
+	text-align: right;
+	width: 800px;
+	height: 249px;
+	float: left;
+}
+.header-img h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 100%;
+	color: #FFFFFF;
+	margin-top: 63px;
+	margin-right: 72px; 
+}
+.header-img p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	margin-top: 10px;
+	margin-right: 136px;
+}
+.menu {
+	background-color: #000000;
+	width: 800px;
+	height: 51px;
+	float: left;
+}
+.menu ul {
+	list-style-type: none;
+}
+.menu ul li {
+	display: inline;
+}
+.menu ul li a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 51px;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-right: 25px;
+	padding-left: 25px;
+}
+.menu ul li a:hover {
+	color: #4BC4EF;
+}
+.content {
+	width: 800px;
+	float: left;
+	padding-top: 12px;
+}
+.left-panel {
+	width: 480px;
+	float: left;
+	padding: 20px 50px 20px 20px;
+}
+.left-panel-in {
+	text-align: justify;
+	clear: both;
+}
+.title {
+	font-size: 18px;
+	font-weight: normal;
+	color: #035c7a;
+	padding-bottom: 3px;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #CCCCCC;
+}
+.copyright {
+	border: 0px;
+	height: 1px;
+	width: 1px;
+}
+.right-panel {
+	width: 250px;
+	float: right;
+}
+.right-panel-in {
+	clear: both;
+}
+.right-panel-in h3 {
+	font-size: 20px;
+	font-weight: normal;
+	color: #346397;
+	margin-top: 25px;
+	margin-bottom: 17px;
+	margin-left: 3px;
+}
+.right-panel-in ul {
+	list-style-type: none;
+}
+.right-panel-in ul li {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #CCCCCC;
+}
+.right-panel-in ul li a {
+	color: #003366;
+	text-decoration: none;
+}
+.right-panel-in ul li a:hover {
+	text-decoration: underline;
+}
+.footer {
+	background-color: #000000;
+	width: 800px;
+	height: 55px;
+	float: left;
+}
+.footer p {
+	color: #FFFFFF;
+	margin-top: 20px;
+	text-align:center;
+}
+
+.footer a {
+	color: #FFFFFF;
+}
+
+  </style>
   
 </head>
 <body>
 <div class="main">
 <div class="page">
 <div class="header">
-<div class="header-img">
+<!-- <div class="header-img">
         <h1>Narayana's Lawyers & Legal Consultancy</h1>
-</div> 
+</div>  -->
 <div class="menu">
 <ul>
-        <li><a href="http://localhost:8080/home">Home</a></li>
-        <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
-        <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
-        <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
-        <li><a href="http://localhost:8080/findCase">Search Cases</a></li>
-        <li><a href="http://localhost:8080/addUser">Client Registration</a></li>
-        <li><a href="http://localhost:8080/publishJournal">Publish Journal</a></li>
+    <li><a href="http://localhost:8080/login">Home</a></li>
+    <li><a href="http://localhost:8080/addAppointment">Schedule an Appointment</a></li>
+    <li><a href="http://localhost:8080/addMail">Subscribe to my Weekly law Journal</a></li>
       </ul>
 </div>
 </div>
 <div class="content">
 <div class="left-panel">
 <div class="left-panel-in">
-<h2 class="title">Enter our mail to subscribe my Law Journal</h2>
+<h2 class="title">Enter your mail to subscribe to my Law Journal</h2>
 <p>&nbsp;</p>
 <form:form id='login-form' action="/addEmail" method='POST' modelAttribute="mail">
 <form:input path="email" type='text' placeholder="Enter your mail"/>
@@ -113,8 +270,8 @@
 </div>
 </div>
 <div class="footer">
-        <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
-            </p>
+	<p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+	</p>
 </div>
 </div>
 </div>
