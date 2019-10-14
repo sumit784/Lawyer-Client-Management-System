@@ -281,7 +281,7 @@ Legal Consultancy per hour will be charged depending on the case type, case valu
 </div>
 </div>
 <div class="footer">
-	<p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+	<p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy
 	</p>
 </div>
 </div>
