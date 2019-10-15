@@ -21,12 +21,12 @@
 </div>
 <div class="menu">
 <ul>
-  <li><a href="http://localhost:8080/home">Home</a></li>
-  <li><a href="http://localhost:8080/viewAnn">General Announcements</a></li>
-  <li><a href="http://localhost:8080/viewMess">Messages from the lawyer</a></li>
-  <li><a href="http://localhost:8080/viewCase">My Cases</a></li>
-  <li><a href="http://localhost:8080/downloads">My Documents</a></li>
-  <li><a href="http://localhost:8080/upload">Upload files</a></li>
+  <li><a href="/home">Home</a></li>
+  <li><a href="/viewAnn">General Announcements</a></li>
+  <li><a href="/viewMess">Messages from the lawyer</a></li>
+  <li><a href="/viewCase">My Cases</a></li>
+  <li><a href="/downloads">My Documents</a></li>
+  <li><a href="/upload">Upload files</a></li>
 </ul>
 </div>
 </div>
@@ -95,7 +95,7 @@ ${s}
 </div>
 </div>
 <div class="footer">
-  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="/logout">Logout</a>
   </p>
 </div>
 </div>

@@ -181,8 +181,8 @@ a:hover {
 <div class="menu">
 <ul>
   <li><a href="#">Home</a></li>
-  <li><a href="http://localhost:8080/addAppointment">Schedule an Appointment</a></li>
-  <li><a href="http://localhost:8080/addMail">Subscribe to my Weekly Law Journal</a></li>
+  <li><a href="/addAppointment">Schedule an Appointment</a></li>
+  <li><a href="/addMail">Subscribe to my Weekly Law Journal</a></li>
 </ul>
 </div>
 </div>

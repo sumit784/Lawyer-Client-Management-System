@@ -36,14 +36,14 @@
     </div>
 <div class="menu">
 <ul>
-    <li><a href="http://localhost:8080/viewAppointments">Appointments</a></li>
-    <li><a href="http://localhost:8080/viewUsers">Clients</a></li>
-    <li><a href="http://localhost:8080/viewAllCases">Cases</a></li>
-    <li><a href="http://localhost:8080/addCase">New Case</a></li>
-    <li><a href="http://localhost:8080/findCase">Search</a></li>
-    <li><a href="http://localhost:8080/addUser">New Client</a></li>
-    <li><a href="http://localhost:8080/publishJournal">Journal</a></li>
-    <li><a href="http://localhost:8080/addMessage">Message</a></li>
+    <li><a href="/viewAppointments">Appointments</a></li>
+    <li><a href="/viewUsers">Clients</a></li>
+    <li><a href="/viewAllCases">Cases</a></li>
+    <li><a href="/addCase">New Case</a></li>
+    <li><a href="/findCase">Search</a></li>
+    <li><a href="/addUser">New Client</a></li>
+    <li><a href="/publishJournal">Journal</a></li>
+    <li><a href="/addMessage">Message</a></li>
 </ul>
 </div>
 </div>
@@ -179,7 +179,7 @@ platea dictumst. Maecenas a dui leo, sit amet dignissim nisi.<br>
 </div>
 </div>
 <div class="footer">
-  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="http://localhost:8080/logout">Logout</a>
+  <p>&copy; Copyright 2019. Narayana's Lawyers & Legal Consultancy  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <a href="/logout">Logout</a>
   </p>
 </div>
 </div>

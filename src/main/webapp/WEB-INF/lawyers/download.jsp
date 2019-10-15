@@ -14,7 +14,7 @@
         
             <input id="name" type="text"/>
             <script>
-                var url='http://localhost:8080/download/file/';
+                var url='/download/file/';
             </script>
             <button onclick="location.href=url+document.querySelector('#name').value">download</button>
     </body>
