@@ -38,7 +38,7 @@ Lawyer can publish Journal via Mail.
 
 ## Disclaimer
 This project is Licensed.  
-Any use for Academic/Industry purposes need a written application to the author.
+Any use for Academic/Industry purposes will require a written application to the author.
 
 ## License
 See the updated terms and conditions of the license at https://opensource.org/licenses/BSD-3-Clause
