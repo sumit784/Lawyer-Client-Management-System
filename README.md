@@ -3,6 +3,7 @@
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Hosted](#hosted)
+* [Notable Features](#notable-features)
 * [Disclaimer](#disclaimer)
 
 ## General info
@@ -28,6 +29,10 @@ $ java -jar target/[jar-file]
 
 ## Hosted
 This project is hosted at http://lawyer-management.herokuapp.com
+
+## Notable Features
+Client can upload and download documents.  
+Lawyer can publish Journal via Mail.  
 
 
 ## Disclaimer
