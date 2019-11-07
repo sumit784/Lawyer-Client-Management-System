@@ -13,6 +13,7 @@ Open docs folder for more information about System Design.
 ## Technologies
 Project is created with:
 * Spring Boot
+* MySQL
 * Maven
 * Apache Tomcat Server
 * JPA provider : Hibernate
