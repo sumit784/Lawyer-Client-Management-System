@@ -19,6 +19,7 @@ Project is created with:
 * Maven
 * Apache Tomcat Server
 * JPA provider : Hibernate
+* Visual Studio Code aka VS Code
 	
 ## Setup
 To run this project locally,  
